@@ -148,8 +148,14 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 
 	@Override
 	protected void onRefresh() {
+		//执行Spring的底层IOC和AOP的初始化
 		super.onRefresh();
 		try {
+			/**
+			 * 创建WEB服务
+			 * 1. 实例化并启动内嵌的Tomcat等容器
+			 * 2. 启动SpringwebMVC的实例注册
+			 */
 			createWebServer();
 		}
 		catch (Throwable ex) {
@@ -176,7 +182,11 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 		WebServer webServer = this.webServer;
 		ServletContext servletContext = getServletContext();
 		if (webServer == null && servletContext == null) {
+			// 获取第一个ServletWebServerFactory 容器，可能回事tomcat，jetty等
 			ServletWebServerFactory factory = getWebServerFactory();
+			/**
+			 * 此处实例化tomcat等容器，并将其启动
+			 */
 			this.webServer = factory.getWebServer(getSelfInitializer());
 		}
 		else if (servletContext != null) {

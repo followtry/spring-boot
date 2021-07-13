@@ -31,6 +31,8 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.util.Assert;
 
 /**
+ * 支持自定义的初始化，依赖的Spring的BeanPostProcessor的回调机制
+ *
  * {@link BeanPostProcessor} that applies all {@link WebServerFactoryCustomizer} beans
  * from the bean factory to {@link WebServerFactory} beans.
  *
@@ -55,6 +57,7 @@ public class WebServerFactoryCustomizerBeanPostProcessor implements BeanPostProc
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		if (bean instanceof WebServerFactory) {
+			//如果当前的Bean是WebServerFactory，比如Tomcat的，则
 			postProcessBeforeInitialization((WebServerFactory) bean);
 		}
 		return bean;

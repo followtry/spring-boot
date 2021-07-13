@@ -52,6 +52,8 @@ import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
+ * 自动配置DispatcherServlet类，只工作与内嵌了web容器的独立应用
+ *
  * {@link EnableAutoConfiguration Auto-configuration} for the Spring
  * {@link DispatcherServlet}. Should work for a standalone application where an embedded
  * web server is already present and also for a deployable application using
@@ -70,12 +72,12 @@ import org.springframework.web.servlet.DispatcherServlet;
 @AutoConfigureAfter(ServletWebServerFactoryAutoConfiguration.class)
 public class DispatcherServletAutoConfiguration {
 
-	/*
+	/**
 	 * The bean name for a DispatcherServlet that will be mapped to the root URL "/"
 	 */
 	public static final String DEFAULT_DISPATCHER_SERVLET_BEAN_NAME = "dispatcherServlet";
 
-	/*
+	/**
 	 * The bean name for a ServletRegistrationBean for the DispatcherServlet "/"
 	 */
 	public static final String DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME = "dispatcherServletRegistration";

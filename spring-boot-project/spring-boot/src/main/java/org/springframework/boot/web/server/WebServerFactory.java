@@ -17,6 +17,8 @@
 package org.springframework.boot.web.server;
 
 /**
+ * webServer的标记接口，可以是非Servlet类型的容器
+ *
  * Tagging interface for factories that create a {@link WebServer}.
  *
  * @author Phillip Webb

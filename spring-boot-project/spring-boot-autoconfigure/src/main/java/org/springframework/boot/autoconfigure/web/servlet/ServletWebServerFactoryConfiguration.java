@@ -37,6 +37,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 此处是实例化容器的WebServerFactory，屏蔽了不同容器不同的实例化的流程细节
+ *
  * Configuration classes for servlet web servers
  * <p>
  * Those should be {@code @Import} in a regular auto-configuration class to guarantee
@@ -53,6 +55,7 @@ class ServletWebServerFactoryConfiguration {
 
 	@Configuration
 	@ConditionalOnClass({ Servlet.class, Tomcat.class, UpgradeProtocol.class })
+	//该条件保证即使存在逗哥Servlet容器，也只会初始化一个
 	@ConditionalOnMissingBean(value = ServletWebServerFactory.class, search = SearchStrategy.CURRENT)
 	static class EmbeddedTomcat {
 
@@ -68,6 +71,7 @@ class ServletWebServerFactoryConfiguration {
 	 */
 	@Configuration
 	@ConditionalOnClass({ Servlet.class, Server.class, Loader.class, WebAppContext.class })
+	//该条件保证即使存在逗哥Servlet容器，也只会初始化一个
 	@ConditionalOnMissingBean(value = ServletWebServerFactory.class, search = SearchStrategy.CURRENT)
 	static class EmbeddedJetty {
 

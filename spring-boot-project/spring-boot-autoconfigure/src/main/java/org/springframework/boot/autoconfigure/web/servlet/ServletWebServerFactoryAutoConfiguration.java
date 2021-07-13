@@ -42,6 +42,8 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 配置Servlet的应用服务器
+ *
  * {@link EnableAutoConfiguration Auto-configuration} for servlet web servers.
  *
  * @author Phillip Webb
@@ -95,6 +97,7 @@ public class ServletWebServerFactoryAutoConfiguration {
 			if (this.beanFactory == null) {
 				return;
 			}
+			//注册两个合并的BeanDefinition
 			registerSyntheticBeanIfMissing(registry, "webServerFactoryCustomizerBeanPostProcessor",
 					WebServerFactoryCustomizerBeanPostProcessor.class);
 			registerSyntheticBeanIfMissing(registry, "errorPageRegistrarBeanPostProcessor",
